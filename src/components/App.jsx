@@ -50,9 +50,12 @@ const App = () => {
         if (totalHits === 0) {
           toast.error('Картинок не знайдено');
         } else {
-          toast.info(`Знайдено ${totalHits} картинок`, {
-            autoClose: 2000,
-          });
+          if (page === 1) {
+            toast.info(`Знайдено ${totalHits} картинок`, {
+              autoClose: 2000,
+            });
+          }
+          return;
         }
       } catch (error) {
         toast.error(error.message);
