@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Overlay, ModalDiv } from './Modal.styled';
 
 const Modal = ({ image, onClose }) => {
-  // componentDidMount() {
-  //   window.addEventListener('keydown', this.handleKeyDown);
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('keydown', this.handleKeyDown);
-  // }
-
-  //! TODO: add listener for keydown
-
-  const handleKeyDown = event => {
-    if (event.code === 'Escape') {
+  const handleUserPressKey = useCallback(
+    e => {
+      const { keyCode } = e;
+      if (keyCode !== 27) {
+        return;
+      }
       onClose();
-    }
-  };
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleUserPressKey);
+    return () => {
+      window.removeEventListener('keydown', handleUserPressKey);
+    };
+  }, [handleUserPressKey]);
 
   const handleClick = event => {
     if (event.target === event.currentTarget) {
