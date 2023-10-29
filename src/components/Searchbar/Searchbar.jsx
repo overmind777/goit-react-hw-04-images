@@ -9,13 +9,9 @@ import {
 } from './Searchbar.styled';
 
 const Searchbar = ({ onSubmit }) => {
-  // state = {
-  //   query: '',
-  // };
   const [query, setQuery] = useState('');
 
   const handleChange = event => {
-    // this.setState({ query: event.target.value });
     setQuery(event.target.value);
   };
 
